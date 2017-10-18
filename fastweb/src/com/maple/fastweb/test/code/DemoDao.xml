@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maple.fastweb.test.code.DemoDao">
+
+<!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.maple.fastweb.test.code.Demo">
+        <result column="id" property="id"/>
+        <result column="age" property="age"/>
+        <result column="name" property="name"/>
+        <result column="email" property="email"/>
+        <result column="test" property="test"/>
+    </resultMap>
+
+<!--auto generated Code-->
+    <sql id="all_column">
+        id,
+        age,
+        name,
+        email,
+        test
+    </sql>
+
+<!--auto generated Code-->
+    <insert id="insert">
+        INSERT INTO demo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id != null"> id, </if>
+            <if test="pojo.age != null"> age, </if>
+            <if test="pojo.name != null"> name, </if>
+            <if test="pojo.email != null"> email, </if>
+            <if test="pojo.test != null"> test, </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id != null"> #{pojo.id}, </if>
+            <if test="pojo.age != null"> #{pojo.age}, </if>
+            <if test="pojo.name != null"> #{pojo.name}, </if>
+            <if test="pojo.email != null"> #{pojo.email}, </if>
+            <if test="pojo.test != null"> #{pojo.test}, </if>
+        </trim>
+    </insert>
+
+<!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO demo(
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.age},
+            #{pojo.name},
+            #{pojo.email},
+            #{pojo.test}
+            )
+        </foreach>
+    </insert>
+
+<!--auto generated Code-->
+    <update id="update">
+        UPDATE demo
+        <set>
+            <if test="pojo.id != null"> id = #{pojo.id}, </if>
+            <if test="pojo.age != null"> age = #{pojo.age}, </if>
+            <if test="pojo.name != null"> name = #{pojo.name}, </if>
+            <if test="pojo.email != null"> email = #{pojo.email}, </if>
+            <if test="pojo.test != null"> test = #{pojo.test} </if>
+        </set>
+         WHERE id = #{pojo.id}
+    </update>
+
+<!--auto generated Code-->
+    <select id="select" resultMap="AllColumnMap">
+        SELECT <include refid="all_column"/>
+        FROM demo
+        <where>
+            <if test="pojo.id != null"> AND id = #{pojo.id} </if>
+            <if test="pojo.age != null"> AND age = #{pojo.age} </if>
+            <if test="pojo.name != null"> AND name = #{pojo.name} </if>
+            <if test="pojo.email != null"> AND email = #{pojo.email} </if>
+            <if test="pojo.test != null"> AND test = #{pojo.test} </if>
+        </where>
+        LIMIT 10000 
+    </select>
+
+<!--auto generated Code-->
+    <delete id="delete">
+        DELETE FROM demo where id = #{pojo.id}
+    </delete>
+</mapper>

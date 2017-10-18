@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <!-- Globally enables or disables any caches configured in any mapper under this configuration -->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- Sets the number of seconds the driver will wait for a response from the database -->
+        <setting name="defaultStatementTimeout" value="3000"/>
+        <!-- Enables automatic mapping from classic database column names A_COLUMN to camel case classic Java property names aColumn -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- Allows JDBC support for generated keys. A compatible driver is required.
+        This setting forces generated keys to be used if set to true,
+         as some drivers deny compatibility but still work -->
+        <setting name="useGeneratedKeys" value="true"/>
+    </settings>
+
+    <!-- Continue going here -->
+    <typeAliases>
+        <typeAlias type="com.maple.fastweb.mybatis.model.User" alias="user"/>
+        <typeAlias type="com.maple.fastweb.mybatis.model.Commonlog" alias="commonlog"/>
+        <typeAlias type="com.maple.fastweb.base.pojo.PageInfo" alias="pageInfo"/>
+    </typeAliases>
+
+    <plugins>
+        <plugin interceptor="com.maple.fastweb.mybatis.interceptor.MybatisExcutorInterceptor" >
+            <property name="dialect" value="mysql" />
+        </plugin>
+    </plugins>
+
+    <mappers>
+        <mapper resource="mybatis/UserMapper.xml"></mapper>
+        <mapper resource="mybatis/CommonlogMapper.xml"></mapper>
+    </mappers>
+
+</configuration>
